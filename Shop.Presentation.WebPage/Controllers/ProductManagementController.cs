@@ -33,5 +33,11 @@ namespace Shop.Presentation.WebPage.Controllers
         {
             return this._productHandler.RegisterProduct(newProducto);
         }
+
+        [HttpGet] 
+        public IEnumerable<RegisteredProduct> GetAllProducts()
+        {
+            return this._productHandler.GetAllProducts();
+        }
     }
 }
