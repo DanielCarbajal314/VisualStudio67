@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-12" id="app">
+    <div class="col-4">
+        <div class="form-group">
+            <label>Categoria</label>
+            <select v-model="categoryId" class="form-control">
+                <option v-for="category in categories" v-bind:value="category.Id">
+                    {{ category.Name }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Nombre Del Producto</label>
+            <input v-model="nombre" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Descripcion Del Producto</label>
+            <input v-model="descripcion" class="form-control" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" v-on:click="RegistrarProductoEnElServidor">Registrar nuevo Producto</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            categories: [],
+            categoryId: null,
+            nombre: '',
+            descripcion:''
+        },
+        methods: {
+            GetCategoriesFromServer: function () {
+                $.get('/api/productmanagement/GetAllCategories')
+                    .then(categoryArray => {
+                        this.categories.push(...categoryArray);
+                    });
+            },
+            ResetearInterface: function () {
+                this.nombre = '';
+                this.descripcion = '';
+                this.categoryId = null;
+            },
+            RegistrarProductoEnElServidor: function () {
+                post('/api/productmanagement/RegisterProduct', {
+                    Name: this.nombre,
+                    Descripcion: this.descripcion,
+                    CategoryId: this.categoryId
+                })
+                .then(x => {
+                    console.log(x);
+                    this.ResetearInterface();
+                });
+            }
+        }
+    })
+    app.GetCategoriesFromServer();
+    function post(url,data) {
+        return $.ajax({
+            url: url,
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+        })
+    }
+</script>
+
