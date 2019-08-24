@@ -1,4 +1,5 @@
-﻿using Shop.Services.implementation;
+﻿using Shop.Presentation.WebPage.Filtros;
+using Shop.Services.implementation;
 using Shop.Services.Interfaces.Handlers;
 using Shop.Services.Interfaces.Requests;
 using Shop.Services.Interfaces.Responses;
@@ -11,6 +12,7 @@ using System.Web.Http;
 
 namespace Shop.Presentation.WebPage.Controllers
 {
+    [FiltroDeExcepciones]
     public class ProductManagementController : ApiController
     {
 
