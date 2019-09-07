@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.Presentation.WebPage.Filtros;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -13,7 +14,7 @@ namespace Shop.Presentation.WebPage
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();
-
+            config.Filters.Add(new FiltroDeExcepciones());
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",

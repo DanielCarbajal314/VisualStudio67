@@ -71,6 +71,10 @@ namespace Shop.Services.implementation
             };
             using (var db = new ShopDb())
             {
+                if (db.Products.Where(x => x.Name.Equals(product.Name)).Any())
+                {
+                    throw new Exception("No se pueden registrar Productos con el mismo nombre");
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return new RegisteredProduct()

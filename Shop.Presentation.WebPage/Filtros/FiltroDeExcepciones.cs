@@ -15,10 +15,13 @@ namespace Shop.Presentation.WebPage.Filtros
     {
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
-            {
-                Content = new StringContent(actionExecutedContext.Exception.Message)
-            };
+            actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(
+                HttpStatusCode.InternalServerError,
+                new
+                {
+                    MensajeDelError = actionExecutedContext.Exception.Message
+                }
+            );
         }
     }
 }

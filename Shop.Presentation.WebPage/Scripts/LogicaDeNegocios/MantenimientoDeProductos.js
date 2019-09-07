@@ -1,4 +1,6 @@
-﻿var app = new Vue({
+﻿Vue.use(Toasted);
+
+var app = new Vue({
     el: '#app',
     data: {
         categories: [],
@@ -8,13 +10,19 @@
         nombreFiltro:'',
         descripcion: '',
         listaDeProductos: [],
-        listaDeProductosSinFiltrar:[]
+        listaDeProductosSinFiltrar: [],
+        dialog: false
     },
+    vuetify: new Vuetify(),
     methods: {
         GetCategoriesFromServer: function () {
             $.get('/api/productmanagement/GetAllCategories')
                 .then(categoryArray => {
                     this.categories.push(...categoryArray);
+                })
+                .catch(error => {
+                    let excepcion = JSON.parse(error.responseText);
+                    Vue.toasted.error(excepcion.MensajeDelError);
                 });
         },
         ResetearInterface: function () {
@@ -31,7 +39,10 @@
                 .then(newProduct => {
                     this.listaDeProductos.push(newProduct);
                     this.ResetearInterface();
-                });
+                }).catch(error => {
+                    let excepcion = JSON.parse(error.responseText);
+                    Vue.toasted.error(excepcion.MensajeDelError);
+                });;
         },
         CargarProductosDelServidor: function () {
             $.get('/api/productmanagement/GetAllProducts')

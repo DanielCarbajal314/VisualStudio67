@@ -13,6 +13,9 @@ namespace Shop.Presentation.WebPage.Controllers
     {
         public ActionResult Index()
         {
+            Session["Persona"] = DateTime.Now.ToString("hh:mm:ss");
+            HttpContext.Application["Bar"] = DateTime.Now.ToString("hh:mm:ss");
+
             var boleta = new Boleta()
             {
                 FechaDeVenta = DateTime.Now,
@@ -32,7 +35,7 @@ namespace Shop.Presentation.WebPage.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewBag.InformacionGlobal = HttpContext.Application["Bar"].ToString();
             return View();
         }
 

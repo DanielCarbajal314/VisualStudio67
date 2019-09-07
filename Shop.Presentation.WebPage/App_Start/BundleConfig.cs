@@ -25,6 +25,18 @@ namespace Shop.Presentation.WebPage
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/vuetify").Include(
+                   "~/Content/VueMaterial/roboto.css",
+                   "~/Content/MaterialDesign.css",
+                   "~/Content/VueMaterial/Vuetify.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/VueConVuetify").Include(
+                                "~/Scripts/Vue/Vue.js",
+                                "~/Scripts/Vue/VuetifyJs.js"));
+
+            BundleTable.EnableOptimizations = false;
+
         }
     }
 }

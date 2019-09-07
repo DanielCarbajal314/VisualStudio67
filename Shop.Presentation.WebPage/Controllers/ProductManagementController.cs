@@ -12,7 +12,6 @@ using System.Web.Http;
 
 namespace Shop.Presentation.WebPage.Controllers
 {
-    [FiltroDeExcepciones]
     public class ProductManagementController : ApiController
     {
 
