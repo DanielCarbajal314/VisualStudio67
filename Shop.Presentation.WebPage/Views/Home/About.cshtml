@@ -1,18 +1,21 @@
-﻿
-<h2>@Session["Persona"]</h2>
+﻿<h2>@Session["Persona"]</h2>
 <h2>@ViewBag.InformacionGlobal</h2>
 @Scripts.Render("~/bundles/VueConVuetify")
 
 <div id="app">
+    <input type="text" class="form-control" v-model="usuario"/>
+    <button v-on:click="EnviarMensajeAlServidorComoUsuario">Enviar Mensaje Con Nombre</button>
     <table class="table">
         <thead>
             <tr>
+                <th>Usuario</th>
                 <th>Mensajes</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="mensaje in mensajesEnviados">
-                <td>{{mensaje}}</td>
+                <td>{{mensaje.Usuario}}</td>
+                <td>{{mensaje.Mensaje}}</td>
             </tr>
         </tbody>
     </table>
@@ -30,12 +33,20 @@
     var app = new Vue({
         el: '#app',
         data: {
-            mensaje: '',
-            mensajesEnviados:[]
+            mensaje : '',
+            mensajesEnviados : [],
+            usuario : ''
         },
         methods: {
             EnviarMensajeAlServidor: function () {
                 chatProxy.server.enviarMensaje(this.mensaje);
+                this.mensaje = '';
+            },
+            EnviarMensajeAlServidorComoUsuario: function () {
+                chatProxy.server.enviarMensajeComoUsuario({
+                    Usuario: this.usuario,
+                    Mensaje: this.mensaje
+                });
                 this.mensaje = '';
             }
         }
@@ -43,7 +54,16 @@
 
     var chatProxy = $.connection.chatHub;
     chatProxy.client.NuevoMensaje = function (mensaje) {
-        app.mensajesEnviados.push(mensaje)
+        app.mensajesEnviados.push({
+            Usuario: 'Anonima',
+            Mensaje: mensaje
+        })
+    };
+    chatProxy.client.NuevoMensajeDelUsuario = function (mensaje) {
+        app.mensajesEnviados.push({
+            Usuario: mensaje.Usuario,
+            Mensaje: mensaje.Mensaje
+        })
     };
     $.connection.hub.start();
 

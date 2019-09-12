@@ -12,5 +12,15 @@ namespace Shop.Presentation.WebPage.Hubs
         {
             Clients.All.NuevoMensaje(mensaje);
         }
+
+        public void EnviarMensajeComoUsuario(MensajeDeUsuario mensaje)
+        {
+            Clients.All.NuevoMensajeDelUsuario(mensaje);
+        }
+    }
+
+    public class MensajeDeUsuario {
+        public string Usuario { get; set; }
+        public string Mensaje { get; set; }
     }
 }
