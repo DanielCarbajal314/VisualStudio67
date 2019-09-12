@@ -1,5 +1,50 @@
 ﻿
 <h2>@Session["Persona"]</h2>
 <h2>@ViewBag.InformacionGlobal</h2>
+@Scripts.Render("~/bundles/VueConVuetify")
+
+<div id="app">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mensajes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="mensaje in mensajesEnviados">
+                <td>{{mensaje}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-12 row">
+        <div class="form-group">
+            <label>Mensaje</label>
+            <input v-model="mensaje" class="form-control" type="text" />
+            <button  v-on:click="EnviarMensajeAlServidor"class="btn btn-primary">Enviar Mensaje</button>
+        </div>
+    </div>
+</div>
 
 
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            mensaje: '',
+            mensajesEnviados:[]
+        },
+        methods: {
+            EnviarMensajeAlServidor: function () {
+                chatProxy.server.enviarMensaje(this.mensaje);
+                this.mensaje = '';
+            }
+        }
+    })
+
+    var chatProxy = $.connection.chatHub;
+    chatProxy.client.NuevoMensaje = function (mensaje) {
+        app.mensajesEnviados.push(mensaje)
+    };
+    $.connection.hub.start();
+
+</script>
