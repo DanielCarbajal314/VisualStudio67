@@ -11,7 +11,12 @@ namespace Shop.Presentation.SecureWebApi.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
+            return View();
+        }
 
+        public ActionResult Arhivo()
+        {
+            ViewBag.Title = "Home Page";
             return View();
         }
     }

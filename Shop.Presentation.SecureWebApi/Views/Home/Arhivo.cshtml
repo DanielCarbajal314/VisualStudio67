@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Arhivo";
+}
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+
+
+<h2>Arhivo</h2>
+<div id="app">
+    <div class="form-group">
+        <label>Archivo para Cargar</label>
+        <input type="file" class="form-control" v-on:change="previewFiles" ref="myFiles"  multiple/>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" v-on:click="cargarArchivo" >Cargar archivo</button>
+    </div>
+
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            archivos: null
+        },
+        methods: {
+            cargarArchivo: function () {
+                let formData = new FormData();
+                for (let i = 0; i < this.archivos.length;i++){
+                    formData.append(this.archivos[i].name, this.archivos[i]); 
+                }
+                $.ajax({
+                    url: '/api/Archivos/Cargar',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false
+                }); 
+                
+            },
+            previewFiles() {
+                this.archivos = this.$refs.myFiles.files
+            }
+        }
+    })
+
+</script>
