@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Presentation.WindowsSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Presentation.SecureWebApi", "Shop.Presentation.SecureWebApi\Shop.Presentation.SecureWebApi.csproj", "{32C14B1C-1A57-426A-A7AB-662E23962825}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Test.UnitTest", "Shop.Test.UnitTest\Shop.Test.UnitTest.csproj", "{00C1C6D4-BC4F-4F32-9F28-AE9148FBABA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{32C14B1C-1A57-426A-A7AB-662E23962825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C14B1C-1A57-426A-A7AB-662E23962825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C14B1C-1A57-426A-A7AB-662E23962825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C1C6D4-BC4F-4F32-9F28-AE9148FBABA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C1C6D4-BC4F-4F32-9F28-AE9148FBABA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C1C6D4-BC4F-4F32-9F28-AE9148FBABA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C1C6D4-BC4F-4F32-9F28-AE9148FBABA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{4AFFB8E1-8D84-4015-9A63-56285F22A020} = {65426B1E-8CA3-4D46-AEB2-97D496BCFE7E}
 		{62497F44-58CC-40BE-915F-DD561EACCBFB} = {65426B1E-8CA3-4D46-AEB2-97D496BCFE7E}
 		{32C14B1C-1A57-426A-A7AB-662E23962825} = {65426B1E-8CA3-4D46-AEB2-97D496BCFE7E}
+		{00C1C6D4-BC4F-4F32-9F28-AE9148FBABA8} = {161E8858-5D41-4AD1-9324-5B461F104314}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ACFFC2DC-1622-469A-9D2F-40DE1E11408B}
